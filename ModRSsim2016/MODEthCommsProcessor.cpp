@@ -168,7 +168,7 @@ CHAR  telegramBuffer[MAX_MOD_MESSAGELENGTH];
 CHAR  responseBuffer[MAX_MOD_MESSAGELENGTH];
 CHAR  debugStr[MAX_MOD_MESSAGELENGTH];
 WORD  responseLen;
-BYTE  *pDataPortion;
+BYTE  *pDataPortion = 0;
 int   i=0;
 //WORD  guardword1=1;
 WORD  requestMemArea;   // telegram read/write are being referenced=0..MAX_MOD_MEMTYPES

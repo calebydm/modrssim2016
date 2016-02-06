@@ -14,6 +14,7 @@
     <ProjectGuid>{492645C1-2BFF-4C83-8C77-6F82D91CC490}</ProjectGuid>
     <RootNamespace>MYLIB</RootNamespace>
     <Keyword>MFCProj</Keyword>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

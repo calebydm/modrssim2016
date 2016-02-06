@@ -124,10 +124,8 @@ lpfnSetLayeredWindowAttributes m_pSetLayeredWindowAttributes = NULL;
 // Get a Fn pointer from USER32.DLL to do the transparency
 BOOL GetTNImport()
 {
-OSVERSIONINFO os = { sizeof(os) };
-GetVersionEx(&os);
 // use m_bWin2k before any call to the m_pSetLayeredWindowAttributes to make sure we are runninng Win2K
-BOOL m_bWin2K = ( VER_PLATFORM_WIN32_NT == os.dwPlatformId && os.dwMajorVersion >= 5 ); 
+BOOL m_bWin2K = IsOS(OS_WIN2000ORGREATER);
 
    if (!m_bWin2K)  // bail, requires Win2K or XP to work
       return FALSE;

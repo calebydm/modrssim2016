@@ -95,8 +95,8 @@ LONG CServerSocketArray::AddServers(int numServers,
                                     DWORD PDUSize)
 {
 int index;
-CMODEthCommsProcessor *pServer1;
-CMODEthCommsProcessor *pServer;
+CMODEthCommsProcessor *pServer1 = 0;
+CMODEthCommsProcessor *pServer = 0;
 
    initiating = TRUE;   
    RemoveAll();
