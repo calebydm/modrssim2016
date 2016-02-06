@@ -191,4 +191,5 @@ void CCommsLamp::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
 	// TODO: Add your code to draw the specified item
 	
    // do nothing, we have to do this.
+   UNREFERENCED_PARAMETER(lpDrawItemStruct);
 }

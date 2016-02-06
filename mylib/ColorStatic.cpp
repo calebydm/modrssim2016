@@ -42,6 +42,7 @@ END_MESSAGE_MAP()
 HBRUSH CColorStatic::CtlColor(CDC* pDC, UINT nCtlColor)
 {
    ASSERT(nCtlColor == CTLCOLOR_STATIC);
+   UNREFERENCED_PARAMETER(nCtlColor);
    DWORD dwStyle = GetStyle();
 /*
    if (!(dwStyle & SS_NOTIFY)) {

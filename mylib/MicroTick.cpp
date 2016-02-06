@@ -65,7 +65,7 @@ RECT clientRect;
 CBrush backBrush;
 CPen borderPen;
 COLORREF color, borderColor, textColor;
-CHAR buffer[80];
+TCHAR buffer[80];
 CPen * pOldPen;
 CFont * pOldFont;
 DWORD i=9, borderWidth = m_borderWidth;
@@ -129,7 +129,7 @@ BOOL drawFocus = FALSE;
    ///////////////////////////////////////////////////////////////////
    // Display the text
    buffer[0] = '\0';
-   GetWindowText(buffer, sizeof(buffer));
+   GetWindowText(buffer, _countof(buffer));
    dc.SetBkColor(color);
    // dc.TextOut(); does not work so well, so we did it this way
    clientRect.bottom -=m_borderWidth;   // clip
@@ -139,7 +139,7 @@ BOOL drawFocus = FALSE;
    
    dc.SetBkMode(TRANSPARENT);
    dc.SetTextColor(textColor);
-   dc.DrawText(buffer, strlen(buffer), &clientRect, DT_VCENTER |DT_CENTER);
+   dc.DrawText(buffer, _tcslen(buffer), &clientRect, DT_VCENTER | DT_CENTER);
 
    // select old pen back into DC, not required in a dialog actually
    //dc.SelectObject(pOldPen);
@@ -151,6 +151,7 @@ BOOL drawFocus = FALSE;
 // ------------------------ OnEraseBkgnd -----------------------------
 BOOL CMicroTick::OnEraseBkgnd(CDC* pDC) 
 {
+   UNREFERENCED_PARAMETER(pDC);
    return (1);
 } // OnEraseBkgnd
 
@@ -181,7 +182,7 @@ LOGFONT logFont;
    pFont->GetLogFont(&logFont);
    logFont.lfWidth=0;
    logFont.lfHeight=-9;			// Maybe changed to -10 (3-digit stations truncated slightly)
-   strcpy_s(logFont.lfFaceName, sizeof(logFont.lfFaceName), "Terminal");
+   _tcscpy_s(logFont.lfFaceName, _countof(logFont.lfFaceName), TEXT("Terminal"));
    m_pFont = new CFont;
    m_pFont->CreateFontIndirect(&logFont);
 	CButton::PreSubclassWindow();
@@ -207,6 +208,7 @@ void CMicroTick::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
 	// TODO: Add your code to draw the specified item
 	
    // do nothing, we have to do this.
+   UNREFERENCED_PARAMETER(lpDrawItemStruct);
 }
 
 void CMicroTick::OnSetFocus(CWnd* pOldWnd) 

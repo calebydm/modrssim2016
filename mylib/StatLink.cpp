@@ -46,6 +46,7 @@
  HBRUSH CStaticLink::CtlColor(CDC* pDC, UINT nCtlColor)
  {
      ASSERT(nCtlColor == CTLCOLOR_STATIC);
+	 UNREFERENCED_PARAMETER(nCtlColor);
      DWORD dwStyle = GetStyle();
      if (!(dwStyle & SS_NOTIFY)) {
          // Turn on notify flag to get mouse messages and STN_CLICKED.
@@ -86,7 +87,7 @@
      // Call ShellExecute to run the file.
      // For an URL, this means opening it in the browser.
      //
-     HINSTANCE h = ShellExecute(NULL, "open", m_link, NULL, NULL, SW_SHOWNORMAL);
+     HINSTANCE h = ShellExecute(NULL, TEXT("open"), m_link, NULL, NULL, SW_SHOWNORMAL);
      if ((UINT)h > 32) {
          m_bVisited = TRUE;       // (not really--might not have found link)
          Invalidate();            // repaint to show visited color
@@ -97,7 +98,7 @@
      }
  }
 
-BOOL CStaticLink::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message) 
+BOOL CStaticLink::OnSetCursor(CWnd* /*pWnd*/, UINT /*nHitTest*/, UINT /*message*/) 
 {
    ASSERT(m_hHandCursor); // if running windows versons before 2000, the next couple of lines will not work, 
    // supply a handle in the caller please.

@@ -34,14 +34,14 @@ struct	SColorAndName
 	{
 		ZeroMemory( this, sizeof( SColorAndName ) );		// Init Structure
 	};
-	/**/	SColorAndName( COLORREF crColor, PCSTR cpColor )
+	/**/	SColorAndName( COLORREF crColor, PCTSTR cpColor )
 	{
 		ZeroMemory( this, sizeof( SColorAndName ) );		// Init Structure
 		m_crColor = crColor;								// Set Color RGB Value
-		strncpy_s( m_cColor, sizeof(m_cColor), cpColor, CCB_MAX_COLOR_NAME );	// Set Color Name
+		_tcsncpy_s( m_cColor, _countof(m_cColor), cpColor, _countof(m_cColor) );	// Set Color Name
 	};
 	COLORREF	m_crColor;									// Actual Color RGB Value
-	char		m_cColor[ CCB_MAX_COLOR_NAME ];				// Actual Name For Color
+	TCHAR		m_cColor[ CCB_MAX_COLOR_NAME ];				// Actual Name For Color
 };
 
 
@@ -68,12 +68,12 @@ public:
 	CString			GetSelectedColorName( void );			// Get Selected Color Name
 
 	void			SetSelectedColorValue( COLORREF crClr );// Set Selected Color Value
-	void			SetSelectedColorName( PCSTR cpColor );	// Set Selected Color Name
+	void			SetSelectedColorName( PCTSTR cpColor );	// Set Selected Color Name
 
-	bool			RemoveColor( PCSTR cpColor );			// Remove Color From List
+	bool			RemoveColor( PCTSTR cpColor );			// Remove Color From List
 	bool			RemoveColor( COLORREF crClr );			// Remove Color From List
 	
-	int				AddColor( PCSTR cpNam, COLORREF crClr );// Insert A New Color
+	int				AddColor( PCTSTR cpNam, COLORREF crClr );// Insert A New Color
 
 // Overrides
 	// ClassWizard generated virtual function overrides

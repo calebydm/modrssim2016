@@ -70,7 +70,7 @@ LONG RegDelete(  HKEY hParentKey,	// handle of open key
                  LPCTSTR lpSubKey 	// address of name of subkey to delete 
               );
 
-LONG EnumerateSerialPorts (char *deviceName, //port name
+LONG EnumerateSerialPorts (LPCTSTR deviceName, //port name
                            DWORD maxLen,     //length of above string
                            DWORD index);     // index, called in a loop (0...) until this fails
 

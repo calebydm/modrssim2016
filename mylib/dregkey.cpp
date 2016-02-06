@@ -21,7 +21,7 @@ LONG RegDelete(  HKEY hParentKey,	// handle of open key
 {
 LONG retValue;             // return value stored
 HKEY hKey;                 // currently open key for enumeration
-CHAR regSubKeyName[4096];  // subkey obtained through enumeration
+TCHAR regSubKeyName[4096];  // subkey obtained through enumeration
 CString regKeyName;        // key-subkenname concatenated
 DWORD index =0;            // enumerated key index#
    
@@ -31,12 +31,12 @@ DWORD index =0;            // enumerated key index#
       return(retValue);
 
    // go into a loop until we run out of subkeys
-   while (ERROR_SUCCESS == RegEnumKey(hKey, index, regSubKeyName, sizeof(regSubKeyName)))
+   while (ERROR_SUCCESS == RegEnumKey(hKey, index, regSubKeyName, _countof(regSubKeyName)))
    {
       // delete the subkey by..
       // building up its full name
       regKeyName = lpSubKey;
-      regKeyName += "\\";
+      regKeyName += TEXT("\\");
       regKeyName += regSubKeyName;
       // recursively delete any subkeys in it
       retValue = RegDelete(hParentKey, regKeyName);
@@ -223,8 +223,8 @@ LONG DRegKey::SetValue(LPCTSTR valueName , DWORD dwValue)
 LONG DRegKey::SetValue(LPCTSTR valueName , LPCTSTR szValue, DWORD length)
 {
    if (-1 == length)
-      length = strlen(szValue);
-   result = RegSetValueEx(m_hKey, valueName, 0, REG_SZ, (BYTE*)szValue, length+1);
+      length = _tcslen(szValue);
+   result = RegSetValueEx(m_hKey, valueName, 0, REG_SZ, (BYTE*)szValue, (length+1) * sizeof(TCHAR));
    return(result);
 } // SetValue
 
@@ -331,7 +331,7 @@ DWORD keyLengthMax;
 
 // ------------------------------ EnumKey ------------------------
 // return the key name at an index
-LONG DRegKey::EnumKey(DWORD index, LPSTR string, DWORD maxSize)
+LONG DRegKey::EnumKey(DWORD index, LPTSTR string, DWORD maxSize)
 {
 LONG ret;
 

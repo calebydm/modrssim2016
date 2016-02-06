@@ -289,6 +289,7 @@ void CDragSizerBmp::OnPaint()
 BOOL CDragSizerBmp::OnEraseBkgnd(CDC* pDC) 
 {
 	// DO nothing
+    UNREFERENCED_PARAMETER(pDC);
 	
 	return 1;//CWnd::OnEraseBkgnd(pDC);
 }
@@ -300,6 +301,9 @@ BOOL CDragSizerBmp::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
 	// TODO: Add your message handler code here and/or call default
 	
 	//return CWnd::OnSetCursor(pWnd, nHitTest, message);
+   UNREFERENCED_PARAMETER(pWnd);
+   UNREFERENCED_PARAMETER(nHitTest);
+   UNREFERENCED_PARAMETER(message);
    HCURSOR hCursor = ::LoadCursor(NULL, IDC_SIZENWSE);
    ASSERT(hCursor);
    ::SetCursor(hCursor);

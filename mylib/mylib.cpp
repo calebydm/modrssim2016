@@ -80,19 +80,19 @@ LONG CalcLRC(BYTE * lrcBuffPtr,    //  -> pointer to buffer at start of LRC
 // PURPOSE: Retrieve hardware configuration from registry instead of letting
 //          the user guess what ports he has available.
 //
-LONG EnumerateSerialPorts (char *deviceName, DWORD maxLen, DWORD index)
+LONG EnumerateSerialPorts (LPCTSTR deviceName, DWORD maxLen, DWORD index)
 {
-CHAR     RegPath[MAX_PATH]  = "HARDWARE\\DEVICEMAP\\SERIALCOMM";
+TCHAR    RegPath[MAX_PATH]  = TEXT("HARDWARE\\DEVICEMAP\\SERIALCOMM");
 HKEY     hKey;
 HKEY     hKeyRoot = HKEY_LOCAL_MACHINE;
 DWORD    retCode;
-CHAR     ClassName[MAX_PATH] = ""; // Buffer for class name.
+TCHAR    ClassName[MAX_PATH] = TEXT(""); // Buffer for class name.
 DWORD    dwcClassLen = MAX_PATH;   // Length of class string.
 DWORD    dwcSubKeys;               // Number of sub keys.
 DWORD    dwcMaxSubKey;             // Longest sub key size.
 DWORD    dwcMaxClass;              // Longest class string.
 DWORD    dwcValues;                // Number of values for this key.
-CHAR     valueName[MAX_VALUE_NAME] ;
+TCHAR    valueName[MAX_VALUE_NAME] ;
 DWORD    dwcValueName = MAX_VALUE_NAME;
 DWORD    dwcMaxValueName;          // Longest Value name.
 DWORD    dwcMaxValueData;          // Longest Value data.
@@ -132,7 +132,7 @@ DWORD    cbData;
                      &ftLastWriteTime); // Last write time.
 
    // Enumerate the Key Values
-   cbData = maxLen ;
+   cbData = maxLen * sizeof(TCHAR);
    dwcValueName = MAX_VALUE_NAME;
    valueName[0] = '\0';
 
@@ -153,11 +153,11 @@ DWORD    cbData;
 
 
 // ------------------------------ FillCharCBox ----------------------
-void FillCharCBox(CComboBox * cBox, DWORD * table, char ** strTable,
+void FillCharCBox(CComboBox * cBox, DWORD * table, TCHAR ** strTable,
                   WORD tableLen, DWORD currentsetting)
 {
 DWORD count;
-CHAR ** strTablePtr = strTable;
+TCHAR ** strTablePtr = strTable;
 
    ASSERT(cBox->m_hWnd!=0);
    cBox->ResetContent();
@@ -177,19 +177,19 @@ void FillSerialCBox(CComboBox * cBox, LPCTSTR currentselection)
 {
 DWORD count;
 LONG retCode;
-CHAR portname[MAX_COMPORT_NAME];
+TCHAR portname[MAX_COMPORT_NAME];
 
    ASSERT(cBox->m_hWnd!=0);
    cBox->ResetContent();
    count = 0;
    while (TRUE)
    {
-      retCode = EnumerateSerialPorts(portname, sizeof(portname), count);
+      retCode = EnumerateSerialPorts(portname, _countof(portname), count);
       if( retCode != SUCCESS)
          break;
       cBox->AddString(portname);
       cBox->SetItemData(count, count);
-      if (strcmp(portname,currentselection)==0)
+      if (_tcscmp(portname,currentselection)==0)
          cBox->SetCurSel(count);
       count++;
    }
@@ -202,16 +202,16 @@ CHAR portname[MAX_COMPORT_NAME];
 // RETURN:  portName - is modified on return.
 // NOTES: This function will accept a port name in the format "\\.\COMnn"
 // without lengthening it in-correctly.
-CHAR * FixComPortName(CHAR *portName)
+TCHAR * FixComPortName(TCHAR *portName)
 {
-CHAR tempPortName[MAX_COMPORT_NAME];
+TCHAR tempPortName[MAX_COMPORT_NAME];
 
-   if (strlen(portName) > strlen("COM1"))
+   if (_tcslen(portName) > _tcslen(TEXT("COM1")))
    {
-      if (0!=strncmp(portName, "\\\\.\\",4))
+      if (0!=_tcsncmp(portName, TEXT("\\\\.\\"),4))
       {
-         sprintf_s(tempPortName, MAX_COMPORT_NAME, "\\\\.\\%s", portName);
-         strcpy_s(portName, MAX_COMPORT_NAME, tempPortName);
+         _stprintf_s(tempPortName, _countof(tempPortName), TEXT("\\\\.\\%s"), portName);
+         _tcscpy_s(portName, _countof(tempPortName), tempPortName);
       }
    }
    return (portName);
@@ -223,9 +223,9 @@ CHAR tempPortName[MAX_COMPORT_NAME];
 // IN     : portName - port name e.g. "COM10"
 // IN/OUT : newName - port name "\\.\COM10"
 // RETURNS: newName -
-CHAR * GetLongComPortName(LPCTSTR portName, LPSTR newName)
+TCHAR * GetLongComPortName(LPCTSTR portName, LPTSTR newName)
 {
-   strcpy_s(newName, MAX_COMPORT_NAME, portName);
+   _tcscpy_s(newName, MAX_COMPORT_NAME, portName);
    return (FixComPortName(newName));
 } // GetLongComPortName
 
@@ -235,7 +235,7 @@ CHAR * GetLongComPortName(LPCTSTR portName, LPSTR newName)
 // It tests this by opening and closing the port.
 BOOL PortInUse(LPCTSTR portName)
 {
-CHAR port[MAX_COMPORT_NAME];
+TCHAR port[MAX_COMPORT_NAME];
 HANDLE   hPort;
 
    GetLongComPortName(portName, port);
@@ -420,13 +420,13 @@ void FillDWordCBox(CComboBox * cBox, DWORD * table, WORD tableLen,
                    DWORD currentsetting)
 {
 DWORD count;
-CHAR temp[256];
+TCHAR temp[256];
 
    ASSERT(cBox->m_hWnd!=0);
    cBox->ResetContent();
    for (count = 0; count < tableLen; count++)
    {
-      sprintf_s(temp, sizeof(temp), "%ld",(DWORD *)table[count]);
+      _stprintf_s(temp, _countof(temp), TEXT("%lu"), table[count]);
       cBox->AddString(temp);  //strTablePtr[count]);
       cBox->SetItemData(count,  *(table + count));
       if (*(table + count) == currentsetting)
@@ -436,7 +436,7 @@ CHAR temp[256];
 
 // utilities
 // -------------------------------- ExistFile ------------------------------
-BOOL ExistFile(const CHAR * fN)
+BOOL ExistFile(LPCTSTR fN)
 {
    HANDLE h = NULL;
    WIN32_FIND_DATA wfd;

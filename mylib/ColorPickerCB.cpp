@@ -27,22 +27,22 @@ static char THIS_FILE[] = __FILE__;
 //
 SColorAndName	CColorPickerCB::ms_pColors[ CCB_MAX_COLORS ] =
 {
-	SColorAndName( RGB( 0x00, 0x00, 0x00 ),	"Black" ),
-	SColorAndName( RGB( 0x80, 0x00, 0x00 ),	"Maroon" ),
-	SColorAndName( RGB( 0x00, 0x80, 0x00 ),	"Green" ),
-	SColorAndName( RGB( 0x80, 0x80, 0x00 ),	"Olive" ),
-	SColorAndName( RGB( 0x00, 0x00, 0x80 ),	"Navy" ),
-	SColorAndName( RGB( 0x80, 0x00, 0x80 ),	"Purple" ),
-	SColorAndName( RGB( 0x00, 0x80, 0x80 ),	"Teal" ),
-	SColorAndName( RGB( 0x80, 0x80, 0x80 ),	"Grey" ),
-	SColorAndName( RGB( 0xC0, 0xC0, 0xC0 ),	"Silver" ),
-	SColorAndName( RGB( 0xFF, 0x00, 0x00 ),	"Red" ),
-	SColorAndName( RGB( 0x00, 0xFF, 0x00 ),	"Lime" ),
-	SColorAndName( RGB( 0xFF, 0xFF, 0x00 ),	"Yellow" ),
-	SColorAndName( RGB( 0x00, 0x00, 0xFF ),	"Blue" ),
-	SColorAndName( RGB( 0xFF, 0x00, 0xFF ),	"Fushcia" ),
-	SColorAndName( RGB( 0x00, 0xFF, 0xFF ),	"Aqua" ),
-	SColorAndName( RGB( 0xFF, 0xFF, 0xFF ),	"White" ),
+	SColorAndName( RGB( 0x00, 0x00, 0x00 ),	TEXT("Black") ),
+	SColorAndName( RGB( 0x80, 0x00, 0x00 ),	TEXT("Maroon") ),
+	SColorAndName( RGB( 0x00, 0x80, 0x00 ),	TEXT("Green") ),
+	SColorAndName( RGB( 0x80, 0x80, 0x00 ),	TEXT("Olive") ),
+	SColorAndName( RGB( 0x00, 0x00, 0x80 ),	TEXT("Navy") ),
+	SColorAndName( RGB( 0x80, 0x00, 0x80 ),	TEXT("Purple") ),
+	SColorAndName( RGB( 0x00, 0x80, 0x80 ),	TEXT("Teal") ),
+	SColorAndName( RGB( 0x80, 0x80, 0x80 ),	TEXT("Grey") ),
+	SColorAndName( RGB( 0xC0, 0xC0, 0xC0 ),	TEXT("Silver") ),
+	SColorAndName( RGB( 0xFF, 0x00, 0x00 ),	TEXT("Red") ),
+	SColorAndName( RGB( 0x00, 0xFF, 0x00 ),	TEXT("Lime") ),
+	SColorAndName( RGB( 0xFF, 0xFF, 0x00 ),	TEXT("Yellow") ),
+	SColorAndName( RGB( 0x00, 0x00, 0xFF ),	TEXT("Blue") ),
+	SColorAndName( RGB( 0xFF, 0x00, 0xFF ),	TEXT("Fushcia") ),
+	SColorAndName( RGB( 0x00, 0xFF, 0xFF ),	TEXT("Aqua") ),
+	SColorAndName( RGB( 0xFF, 0xFF, 0xFF ),	TEXT("White") ),
 };
 
 
@@ -122,7 +122,7 @@ void		CColorPickerCB::DrawItem( LPDRAWITEMSTRUCT pDIStruct )
 	CBrush		brFrameBrush;
 	int			iFourthWidth = 0;
 	int			iItem = pDIStruct -> itemID;
-	int			iAction = pDIStruct -> itemAction;
+	//int			iAction = pDIStruct -> itemAction;
 	int			iState = pDIStruct -> itemState;
 	COLORREF	crColor = 0;
 	COLORREF	crNormal = GetSysColor( COLOR_WINDOW );
@@ -226,7 +226,7 @@ void		CColorPickerCB::SetSelectedColorValue( COLORREF crClr )
 }
 
 
-void		CColorPickerCB::SetSelectedColorName( PCSTR cpColor )
+void		CColorPickerCB::SetSelectedColorName( PCTSTR cpColor )
 {
 	int		iItems = GetCount();
 	CString	sColorName;
@@ -242,7 +242,7 @@ void		CColorPickerCB::SetSelectedColorName( PCSTR cpColor )
 }
 
 
-bool		CColorPickerCB::RemoveColor( PCSTR cpColor )
+bool		CColorPickerCB::RemoveColor( PCTSTR cpColor )
 {
 	int		iItems = GetCount();
 	CString	sColor;
@@ -280,7 +280,7 @@ bool		CColorPickerCB::RemoveColor( COLORREF crClr )
 }
 
 
-int			CColorPickerCB::AddColor( PCSTR cpName, COLORREF crColor )
+int			CColorPickerCB::AddColor( PCTSTR cpName, COLORREF crColor )
 {
 	int		iItem = -1;
 

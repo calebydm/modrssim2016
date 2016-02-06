@@ -189,9 +189,9 @@ int CResizer::GetCoordinate(ESize eType, const RECT &rcInitial, const CBorder &b
   case eFixed:
     {
       //Get initial relative window position
-      RECT rc;
-      GetInitialDlgItemRect(border.nRelID, rc);
-      int nRelOld = GetRectCoord(border.eRelType, rc);
+      RECT rcNew;
+      GetInitialDlgItemRect(border.nRelID, rcNew);
+      int nRelOld = GetRectCoord(border.eRelType, rcNew);
       //Get current relative window position
       int nRelNew = GetRelativeCoord(border);
       //Compute and return new position

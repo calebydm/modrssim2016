@@ -82,7 +82,7 @@ double Round(double val);
 #define MAX_ERROR_STR_LEN     256
 
 CHAR * GetLongComPortName(LPCTSTR portName, LPSTR newName);
-LONG EnumerateSerialPorts (char *deviceName, //port name
+LONG EnumerateSerialPorts (LPCTSTR *deviceName, //port name
                            DWORD maxLen,     //length of above string
                            DWORD index);     // index, called in a loop (0...) until this fails
 
@@ -91,7 +91,7 @@ LONG CalcCRC( BYTE * crcStartPtr,   //  ->
                     WORD * crc            // <->
                    );
 
-BOOL ExistFile(const CHAR * fN);
+BOOL ExistFile(LPCSTR fN);
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -132,7 +132,7 @@ class DRegKey : public CObject
       LONG SetValue(LPCTSTR valueName , DWORD dwValue);
       LONG SetValue(LPCTSTR valueName , LPCTSTR szValue, DWORD length);
       LONG SetValue(LPCTSTR valueName , const BYTE* binData, DWORD length);
-      LONG SetValue(LPCTSTR valueName , CString& stringCString) {const char *pS = stringCString;LONG ret=SetValue(valueName,(const char*)pS, stringCString.GetLength());return(ret);};
+      LONG SetValue(LPCTSTR valueName , CString& stringCString) {LPCTSTR pS = stringCString;LONG ret=SetValue(valueName, pS, stringCString.GetLength());return(ret);};
       // Reg. management functions
       LONG DeleteValue(LPCTSTR valueName);
       LONG DeleteKey(LPCTSTR keyName = NULL);
@@ -140,7 +140,7 @@ class DRegKey : public CObject
 
       LONG EnumKey(CStringArray &csaKeyNames);          // populate a CStringarray with key names
       LONG EnumKey(DWORD index, CString &valueName);         // return the key name at an index
-      LONG EnumKey(DWORD index, LPSTR string, DWORD maxSize);// ditto
+      LONG EnumKey(DWORD index, LPTSTR string, DWORD maxSize);// ditto
    private:
       void Init()
       {  m_hKey = NULL; m_baseKey = NULL;};

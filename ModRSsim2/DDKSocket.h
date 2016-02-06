@@ -29,7 +29,7 @@
 #define SOCKETCURRENTLY_CLOSING     4
 #define SOCKETCURRENTLY_IDLE        5
 
-typedef enum dataDebugAttrib
+enum dataDebugAttrib
 {                                 // Without the changes below the TX and RX are reversed for Modbus TCP/IP Comms display
    dataDebugReceive = 0,          // Swapped dataDebugTransmit with dataDebugReceive by DL on 2015-01-04
    dataDebugTransmit,             // because in RS232Port.cpp Transmit is BOOL TRUE
