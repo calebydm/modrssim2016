@@ -52,6 +52,7 @@ CSimCmdLine::~CSimCmdLine()
 
 void CSimCmdLine::ParseParam( LPCTSTR lpszParam, BOOL bFlag, BOOL bLast )
 {
+	UNREFERENCED_PARAMETER(bFlag);
 CString paramUp(lpszParam);
 CString dcbTok[] = {
       "BAUD",

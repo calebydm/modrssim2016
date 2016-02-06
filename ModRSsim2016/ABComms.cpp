@@ -77,7 +77,11 @@ CABCommsProcessor::CABCommsProcessor(LPCTSTR portNameShort,
                        responseDelay
                        ) 
 {
-CString portName;
+	UNREFERENCED_PARAMETER(baud);
+	UNREFERENCED_PARAMETER(byteSize);
+	UNREFERENCED_PARAMETER(stopBits);
+	UNREFERENCED_PARAMETER(rts);
+	CString portName;
 CString description;
 
    if (PROTOCOL_SELAB232 == pGlobalDialog->m_selectedProtocol)

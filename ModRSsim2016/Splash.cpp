@@ -260,6 +260,7 @@ CString tempText;
 // count down timer messages untill we want to hide the splash screen
 void CSplashWnd::OnTimer(UINT nIDEvent)
 {
+	UNREFERENCED_PARAMETER(nIDEvent);
    if (0 == m_splashShowCount)
    {
    	// Destroy the splash screen window,

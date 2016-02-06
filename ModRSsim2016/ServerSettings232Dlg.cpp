@@ -315,6 +315,8 @@ BOOL CServerSettings232Dlg::PreTranslateMessage(MSG* pMsg)
 //
 BOOL CServerSettings232Dlg::OnTTN_NeedText( UINT id, NMHDR * pNMHDR, LRESULT * pResult )
 {
+	UNREFERENCED_PARAMETER(id);
+	UNREFERENCED_PARAMETER(pResult);
     TOOLTIPTEXT *pTTT = (TOOLTIPTEXT *)pNMHDR;
     UINT nID =pNMHDR->idFrom;
     if (pTTT->uFlags & TTF_IDISHWND)

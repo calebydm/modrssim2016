@@ -167,6 +167,7 @@ void CStarWarsCtrl::OnSize(UINT nType, int cx, int cy)
 /********************************************************************/
 void CStarWarsCtrl::DoStars(CDC *pDC)
 {
+	UNREFERENCED_PARAMETER(pDC);
 	m_MainDC.SetBkColor(RGB(0,0,0));
 	m_MainDC.SetTextColor(RGB(255,255,255));
 	m_MainDC.FillSolidRect(m_rectClient, RGB(0,0,0));
