@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ModRSsim2", "ModRSsim2.vcxproj", "{7690E3EF-B981-43F5-A13D-A7C70A56C000}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ModRSsim2016", "ModRSsim2016.vcxproj", "{7690E3EF-B981-43F5-A13D-A7C70A56C000}"
 	ProjectSection(ProjectDependencies) = postProject
 		{492645C1-2BFF-4C83-8C77-6F82D91CC490} = {492645C1-2BFF-4C83-8C77-6F82D91CC490}
 	EndProjectSection

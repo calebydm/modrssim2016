@@ -18,7 +18,7 @@
     <ProjectGuid>{7690E3EF-B981-43F5-A13D-A7C70A56C000}</ProjectGuid>
     <RootNamespace>ModRSsim2</RootNamespace>
     <Keyword>MFCProj</Keyword>
-    <ProjectName>ModRSsim2</ProjectName>
+    <ProjectName>ModRSsim2016</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -91,7 +91,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>wsock32.lib;$(OutputPath)mylib.lib;version.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>.\Release/ModRSsim2.exe</OutputFile>
+      <OutputFile>.\Release/ModRSsim2016.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <ProgramDatabaseFile>.\Release/mod_RSsim.pdb</ProgramDatabaseFile>
       <SubSystem>Windows</SubSystem>
@@ -138,7 +138,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>wsock32.lib;$(OutputPath)mylib.lib;version.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>.\Debug/ModRSsim2.exe</OutputFile>
+      <OutputFile>.\Debug/ModRSsim2016.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>.\Debug/mod_RSsim.pdb</ProgramDatabaseFile>
