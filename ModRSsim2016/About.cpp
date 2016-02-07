@@ -269,6 +269,8 @@ CString reg;   //registration info
 //
 BOOL CAboutDlg::OnTTN_NeedText( UINT id, NMHDR * pNMHDR, LRESULT * pResult )
 {
+	UNREFERENCED_PARAMETER(id);
+	UNREFERENCED_PARAMETER(pResult);
     TOOLTIPTEXT *pTTT = (TOOLTIPTEXT *)pNMHDR;
     UINT nID =pNMHDR->idFrom;
     if (pTTT->uFlags & TTF_IDISHWND)

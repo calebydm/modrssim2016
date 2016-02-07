@@ -1098,6 +1098,8 @@ BOOL CABCommsProcessor::TestReceiveMessage()
 // ----------------------------------------- OnMessageReceived -------------------------------
 BOOL CABCommsProcessor::OnMessageReceived(BYTE * pAppMessage, DWORD length)
 {
+	UNREFERENCED_PARAMETER(pAppMessage);
+	UNREFERENCED_PARAMETER(length);
    return(FALSE);
 }
 

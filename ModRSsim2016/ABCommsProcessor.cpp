@@ -45,8 +45,14 @@ CCommsProcessor::CCommsProcessor(LPCTSTR    portNameShort,
                      DWORD    rts,
                      int      responseDelay)
 {
-   InitializeCriticalSection(&stateCS);
-   
+	UNREFERENCED_PARAMETER(portNameShort);
+	UNREFERENCED_PARAMETER(baud);
+	UNREFERENCED_PARAMETER(byteSize);
+	UNREFERENCED_PARAMETER(parity);
+	UNREFERENCED_PARAMETER(stopBits);
+	UNREFERENCED_PARAMETER(rts);
+	UNREFERENCED_PARAMETER(responseDelay);
+	InitializeCriticalSection(&stateCS);
 }
 
 CCommsProcessor::~CCommsProcessor()

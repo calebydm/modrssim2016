@@ -244,10 +244,14 @@ void CUpdateCheck::MsgUpdateAvailable(DWORD dwMSlocal, DWORD dwLSlocal, DWORD dw
 
 void CUpdateCheck::MsgUpdateNotAvailable(DWORD dwMSlocal, DWORD dwLSlocal)
 {
+	UNREFERENCED_PARAMETER(dwMSlocal);
+	UNREFERENCED_PARAMETER(dwLSlocal);
 	AfxMessageBox(IDS_UPDATE_NO, MB_OK|MB_ICONINFORMATION);
 }
 
 void CUpdateCheck::MsgUpdateNoCheck(DWORD dwMSlocal, DWORD dwLSlocal)
 {
+	UNREFERENCED_PARAMETER(dwMSlocal);
+	UNREFERENCED_PARAMETER(dwLSlocal);
 	AfxMessageBox(IDS_UPDATE_NOCHECK, MB_OK|MB_ICONINFORMATION);
 }

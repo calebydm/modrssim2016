@@ -60,6 +60,9 @@ CPLCApplication::CPLCApplication(LPCTSTR portNameShort,
 					   bcc
                        )
 {
+	UNREFERENCED_PARAMETER(MOSCADchecks);
+	UNREFERENCED_PARAMETER(modifyThenRespond);
+	UNREFERENCED_PARAMETER(disableWrites);
    m_TNS = 0;
 }
 
@@ -378,6 +381,7 @@ void CAB232CommsProcessor::SetEmulationParameters(BOOL moscadChecks,
                                                 BOOL modifyThenRespond, 
                                                 BOOL disableWrites)
 {
+	UNREFERENCED_PARAMETER(moscadChecks);
    //m_MOSCADchecks = moscadChecks;
    m_modifyThenRespond = modifyThenRespond;
    m_disableWrites = disableWrites;

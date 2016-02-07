@@ -43,9 +43,10 @@ static char THIS_FILE[]=__FILE__;
 //
 LONG GetBCC(CHAR * bccString, DWORD msgLen)
 {
-LONG    accumulator = 0;
-
-   return (accumulator);
+	UNREFERENCED_PARAMETER(bccString);
+	UNREFERENCED_PARAMETER(msgLen);
+	LONG    accumulator = 0;
+	return (accumulator);
 } // GetBCC
 
 

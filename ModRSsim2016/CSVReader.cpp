@@ -444,6 +444,7 @@ CString msg, msgFormat;
 // so that we can slice up the time used if needed
 LONG CCSVTextImporter::UpdateRegisters(BOOL manual)
 {
+	UNREFERENCED_PARAMETER(manual);
 LONG count=0;
 //  Initialize Bools for Using register blocks to false
 bool UsingCoils = false;                // Added 2015-Nov-18 by D. Lyons    

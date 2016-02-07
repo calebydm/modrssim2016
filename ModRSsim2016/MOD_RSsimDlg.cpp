@@ -279,7 +279,9 @@ void CMOD_simDlg::DoDataExchange(CDataExchange* pDX)
 // ----------------------------------- OnGetDefID ------------------------------
 LRESULT CMOD_simDlg::OnGetDefID(WPARAM wp, LPARAM lp) 
 {
-   // Do not return an control ID for the default control.
+	UNREFERENCED_PARAMETER(wp);
+	UNREFERENCED_PARAMETER(lp);
+	// Do not return an control ID for the default control.
    // This prevents the <ENTER> key from closing the dialog
     return MAKELONG(0,DC_HASDEFID); 
 }
@@ -3054,7 +3056,9 @@ void CMOD_simDlg::OnMyContextMenu(CWnd*, CPoint point)
 //
 BOOL CMOD_simDlg::OnTTN_NeedText( UINT id, NMHDR * pNMHDR, LRESULT * pResult )
 {
-static char toolTiptext[160];
+	UNREFERENCED_PARAMETER(id);
+	UNREFERENCED_PARAMETER(pResult);
+	static char toolTiptext[160];
 
     TOOLTIPTEXT *pTTT = (TOOLTIPTEXT *)pNMHDR;
     UINT nID =pNMHDR->idFrom;

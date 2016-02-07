@@ -332,7 +332,10 @@ CString formatting;
 
 void CMemoryEditorList::Convert(DWORD memoryValue, ListViewFormats_ format, CString& text)
 {
-   ASSERT(0); // TODO!
+	UNREFERENCED_PARAMETER(memoryValue);
+	UNREFERENCED_PARAMETER(format);
+	UNREFERENCED_PARAMETER(text);
+	ASSERT(0); // TODO!
 }
 
 
@@ -343,6 +346,7 @@ void CMemoryEditorList::Convert(DWORD memoryValue, ListViewFormats_ format, CStr
 // --------------------------- OnDblclk ---------------------------------
 void CMemoryEditorList::OnDblclk(NMHDR* pNMHDR, LRESULT* pResult) 
 {
+	UNREFERENCED_PARAMETER(pNMHDR);
 POINT pt;
 RECT  rect;
 CHAR position[80];

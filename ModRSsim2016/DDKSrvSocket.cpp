@@ -29,9 +29,10 @@ IMPLEMENT_DYNAMIC( CDDKSrvSocket, CDDKSocket);
 // This server socket object will construct a listen socket of accept a pointer to an existing socket.
 CDDKSrvSocket::CDDKSrvSocket(unsigned short port,unsigned long IPAddrULONG /*= ADDR_ANY*/, SOCKET * pServerSocket /*=NULL*/) : CDDKSocket()
 {
-int error;
-CHAR errStr[180],debugStr[180];
-INT      sockoptEnable = TRUE;   
+	UNREFERENCED_PARAMETER(IPAddrULONG);
+	int error;
+	CHAR errStr[180],debugStr[180];
+	INT      sockoptEnable = TRUE;   
 
    m_serverObject = TRUE;
    m_pSocket      = NULL;

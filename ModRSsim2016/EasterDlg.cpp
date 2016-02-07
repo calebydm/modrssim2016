@@ -167,7 +167,9 @@ BOOL CEasterDlg::OnInitDialog()
 //
 void CEasterDlg::OnLButtonDown(UINT nFlags, CPoint point) 
 {
-CString szLink;
+	UNREFERENCED_PARAMETER(nFlags);
+	UNREFERENCED_PARAMETER(point);
+	CString szLink;
               
    szLink.LoadString(IDS_HOMEPAGEURL);
 

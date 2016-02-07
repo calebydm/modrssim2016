@@ -35,8 +35,9 @@
 //    Unused
 void PackField(CHAR **pBuffer, size_t buffSize, int bufferSize, WORD value, WORD length)
 {
-CHAR tempStr[80];
-CHAR formatStr[80];
+	UNREFERENCED_PARAMETER(bufferSize);
+	CHAR tempStr[80];
+	CHAR formatStr[80];
 
    // build a format string
    sprintf_s(formatStr, sizeof(formatStr), "%%0%dX", length);

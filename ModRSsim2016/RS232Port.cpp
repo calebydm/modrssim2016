@@ -191,6 +191,7 @@ VOID CRS232Port::Dump(CDumpContext& dc) const
 // ------------------------- RSStateChanged ----------------------------
 void CRS232Port::RSStateChanged(DWORD state)
 {
+	UNREFERENCED_PARAMETER(state);
    // do nothing in the base class
 } // RSStateChanged
 /*
@@ -265,6 +266,7 @@ CString msg;
 
 void CRS232Port::OnHWError(DWORD dwCommError)
 {
+	UNREFERENCED_PARAMETER(dwCommError);
    // do nothing
 }
 
@@ -450,6 +452,7 @@ LONG CRS232Port::Send(int numberOfBytestoWrite,
                       CHAR* debugStrPtr
                      )
 {
+	UNREFERENCED_PARAMETER(debugStrPtr);
 BOOL error;
 DWORD numberOfBytesWritten=0;
 
@@ -589,12 +592,13 @@ DWORD status;
 // full telegram.
 LONG CRS232Port::Receive(DWORD * numberOfBytesLong, CHAR* bufferPtr, CHAR* debugStrPtr)
 {
-BOOL error;
-DWORD numberOfBytesWritten=0;
-DWORD readAheadLength;        // # bytes we probably need (depends on what we have in the buffer so far)
-DWORD numberOfBytesRead, dwCommError, tickCount;
-BYTE * rxBuffPtr;
-CString debuggerStr;
+	UNREFERENCED_PARAMETER(debugStrPtr);
+	BOOL error;
+	DWORD numberOfBytesWritten=0;
+	DWORD readAheadLength;        // # bytes we probably need (depends on what we have in the buffer so far)
+	DWORD numberOfBytesRead, dwCommError, tickCount;
+	BYTE * rxBuffPtr;
+	CString debuggerStr;
 
    RSStateChanged(RSPORTCURRENTLY_READING);
    if (!keepPolling)
@@ -691,10 +695,11 @@ CString debuggerStr;
 //
 void CRS232Port::Poll(CHAR * debugStr)
 {
-DWORD numBytes;
-CHAR buffer[MAX_MODBUS_MESSAGELEN];
-CHAR debugMsg[80];
-BOOL discard;
+	UNREFERENCED_PARAMETER(debugStr);
+	DWORD numBytes;
+	CHAR buffer[MAX_MODBUS_MESSAGELEN];
+	CHAR debugMsg[80];
+	BOOL discard;
 
    while (keepPolling)  // check to see if we must quit this loop
    {

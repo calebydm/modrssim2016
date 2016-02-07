@@ -114,11 +114,12 @@ BYTE bcc=0;
 /////////////////////////////////////////////////////////////////////////////////
 CProtocolMessage::CProtocolMessage(const BYTE * pMessageRX, DWORD len)
 {
-
+	UNREFERENCED_PARAMETER(pMessageRX);
+	UNREFERENCED_PARAMETER(len);
 }
 CProtocolMessage::CProtocolMessage(const CProtocolMessage & oldProtMessage)
 { //copy constructor
-
+	UNREFERENCED_PARAMETER(oldProtMessage);
 }
 
 
@@ -289,6 +290,8 @@ CABMessage::CABMessage(const CABMessage & oldABMessage)
 // static function
 WORD CABMessage::CalculateReadAheadLength(const BYTE*pBuffer, DWORD length)
 {
+	UNREFERENCED_PARAMETER(pBuffer);
+	UNREFERENCED_PARAMETER(length);
    //if (length < 2)
    //   return(2);  // DLE ACK/NAK or DLE/STX in our case
    // look at the rest of the telegram
@@ -404,6 +407,7 @@ BYTE *crcPtr;
 WORD CABMessage::GetAddressArea(WORD classCode //  modbus command byte
                                 )
 {
+	UNREFERENCED_PARAMETER(classCode);
    /*
    switch(classCode)
    {

@@ -498,6 +498,7 @@ STDMETHODIMP CActiveScriptHost::XActiveScriptSite::GetItemInfo(
 // XActiveScriptSite::GetDocVersionString
 STDMETHODIMP CActiveScriptHost::XActiveScriptSite::GetDocVersionString(LPBSTR pbstrVersion)
 {
+	UNREFERENCED_PARAMETER(pbstrVersion);
 	METHOD_PROLOGUE(CActiveScriptHost, ActiveScriptSite)
 
 	return E_NOTIMPL;
@@ -509,6 +510,8 @@ STDMETHODIMP CActiveScriptHost::XActiveScriptSite::OnScriptTerminate(
             /* [in] */ const VARIANT* pvarResult,
             /* [in] */ const EXCEPINFO* pexcepinfo)
 {
+	UNREFERENCED_PARAMETER(pvarResult);
+	UNREFERENCED_PARAMETER(pexcepinfo);
    METHOD_PROLOGUE(CActiveScriptHost, ActiveScriptSite)
 
    m_running = FALSE;
@@ -521,6 +524,7 @@ STDMETHODIMP CActiveScriptHost::XActiveScriptSite::OnScriptTerminate(
 STDMETHODIMP CActiveScriptHost::XActiveScriptSite::OnStateChange( 
             /* [in] */ SCRIPTSTATE ssScriptState)
 {
+	UNREFERENCED_PARAMETER(ssScriptState);
     METHOD_PROLOGUE(CActiveScriptHost, ActiveScriptSite)
 
 	return S_OK;
@@ -632,6 +636,7 @@ STDMETHODIMP CActiveScriptHost::XActiveScriptSiteWindow::QueryInterface(REFIID i
 // XActiveScriptSiteWindow::EnableModeless
 STDMETHODIMP CActiveScriptHost::XActiveScriptSiteWindow::EnableModeless(BOOL fEnable)
 {
+	UNREFERENCED_PARAMETER(fEnable);
     METHOD_PROLOGUE_EX_(CActiveScriptHost, ActiveScriptSiteWindow)
 	
 	return S_OK;

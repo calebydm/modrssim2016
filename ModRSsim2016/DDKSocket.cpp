@@ -43,6 +43,7 @@ CDDKSocket::CDDKSocket()
 
 CDDKSocket::CDDKSocket(DWORD timeout)
 {
+	UNREFERENCED_PARAMETER(timeout);
    m_socket = INVALID_SOCKET;
    m_serverObject = FALSE;
    // do WSA start-up
@@ -156,12 +157,13 @@ VOID CDDKSocket::Dump(CDumpContext& dc) const
 // ------------------------- SockStateChanged ----------------------------
 void CDDKSocket::SockStateChanged(DWORD state)
 {
+	UNREFERENCED_PARAMETER(state);
    // do nothing in the base class
 } // SockStateChanged
 
 void CDDKSocket::SockDataMessage(LPCTSTR msg)
 {
-
+	UNREFERENCED_PARAMETER(msg);
 }
 
 void CDDKSocket::SockDataDebugger(const CHAR * buffer, LONG length, dataDebugAttrib att)  // Added 2015-01-08
