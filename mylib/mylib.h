@@ -64,7 +64,7 @@
 #define MAX_COMPORT_NAME            256
 
 // dialog-box constants
-#define PORT_INUSESTR      " *"     // appended to LB for used comm ports
+#define PORT_INUSESTR      TEXT(" *")     // appended to LB for used comm ports
 
 int ConvertASCIIToByte(const char*String, BYTE &bValue);
 
@@ -91,8 +91,7 @@ LONG CalcCRC( BYTE * crcStartPtr,   //  ->
                     WORD * crc            // <->
                    );
 
-BOOL ExistFile(LPCSTR fN);
-
+#define ExistFile(pszPath) PathFileExists(pszPath)
 
 /////////////////////////////////////////////////////////////////////////////
 // Registry access class

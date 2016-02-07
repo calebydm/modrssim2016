@@ -90,7 +90,7 @@ void FillCharCBox(CComboBox * cBox, // ptr to the CComboBox
 
 void FillDWordCBox(CComboBox * cBox,      // ptr to the CComboBox
                    DWORD * table,         // array of DWORD values 
-                   WORD tableLen,         // # items in the arrays                
+                   size_t tableLen,         // # items in the arrays                
                    DWORD currentsetting   // current selection item in the box 
                   );
 
@@ -101,7 +101,7 @@ void FillSerialCBoxUsedResources(CComboBox * cBox, // ptr to the CComboBox
                                  LPCTSTR currentselection // current sel.
                                 );
 
-void ClearPortUseMark(LPSTR name);  // remove the "*" if present from the port name
+void ClearPortUseMark(LPTSTR name);  // remove the "*" if present from the port name
 
 BOOL LoadDATAResource(int resourceID, char **pBuffer, DWORD* resSize);
 

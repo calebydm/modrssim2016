@@ -161,14 +161,16 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\simulators\mod_RSsim\ColorPickerCB.h" />
+    <ClInclude Include="ado.h" />
+    <ClInclude Include="ColorPickerCB.h" />
     <ClInclude Include="ColorStatic.h" />
-    <ClInclude Include="..\simulators\mod_RSsim\CommsLamp.h" />
+    <ClInclude Include="CommsLamp.h" />
+    <ClInclude Include="FileEditCtrl.h" />
     <ClInclude Include="MicroTick.h" />
     <ClInclude Include="mylib.h" />
     <ClInclude Include="StatLink.h" />
     <ClInclude Include="StdAfx.h" />
-    <ClInclude Include="..\simulators\mod_RSsim\Tools.h" />
+    <ClInclude Include="Tools.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="myhandcu.cur" />

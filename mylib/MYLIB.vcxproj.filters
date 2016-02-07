@@ -48,13 +48,7 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\simulators\mod_RSsim\ColorPickerCB.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ColorStatic.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\simulators\mod_RSsim\CommsLamp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MicroTick.h">
@@ -69,7 +63,19 @@
     <ClInclude Include="StdAfx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\simulators\mod_RSsim\Tools.h">
+    <ClInclude Include="CommsLamp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tools.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorPickerCB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ado.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FileEditCtrl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

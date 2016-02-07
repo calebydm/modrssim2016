@@ -16,7 +16,6 @@
 #endif // _MSC_VER > 1000
 
 extern CHAR * GetLongComPortName(LPCTSTR portName, LPSTR newName);
-extern CHAR * FixComPortName(CHAR *portName);
 
 
 #define RSPORTCURRENTLY_VOID        0

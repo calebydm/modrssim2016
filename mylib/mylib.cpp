@@ -202,7 +202,7 @@ TCHAR portname[MAX_COMPORT_NAME];
 // RETURN:  portName - is modified on return.
 // NOTES: This function will accept a port name in the format "\\.\COMnn"
 // without lengthening it in-correctly.
-TCHAR * FixComPortName(TCHAR *portName)
+static TCHAR* FixComPortName(TCHAR *portName)
 {
 TCHAR tempPortName[MAX_COMPORT_NAME];
 
@@ -217,242 +217,200 @@ TCHAR tempPortName[MAX_COMPORT_NAME];
    return (portName);
 } // FixComPortName
 
-
 // ----------------------------------- GetLongComPortName --------------------
 // return a port name that caters for com 10 and above
 // IN     : portName - port name e.g. "COM10"
 // IN/OUT : newName - port name "\\.\COM10"
 // RETURNS: newName -
-TCHAR * GetLongComPortName(LPCTSTR portName, LPTSTR newName)
+TCHAR* GetLongComPortName(LPCTSTR portName, LPTSTR newName)
 {
    _tcscpy_s(newName, MAX_COMPORT_NAME, portName);
-   return (FixComPortName(newName));
+   return FixComPortName(newName);
 } // GetLongComPortName
-
 
 // ---------------------------- PortInUse ------------------------------
 // Returns whether the RS-232 port can currently be opened.
 // It tests this by opening and closing the port.
-BOOL PortInUse(LPCTSTR portName)
-{
-TCHAR port[MAX_COMPORT_NAME];
-HANDLE   hPort;
-
-   GetLongComPortName(portName, port);
-   hPort =  CreateFile( port,
-                        GENERIC_READ | GENERIC_WRITE,
-                        (DWORD)NULL,   // exclusive access
-                        NULL,          // no security
-                        OPEN_EXISTING,
-                        FILE_ATTRIBUTE_NORMAL,
-                        NULL           // hTemplate
-                      );
-   if (INVALID_HANDLE_VALUE != hPort)
-   {
-      CloseHandle(hPort);
-      return (FALSE);
-   }
-   return (TRUE);
+BOOL PortInUse(LPCTSTR portName){
+	TCHAR port[MAX_COMPORT_NAME];
+	GetLongComPortName(portName, port);
+	HANDLE hPort = CreateFile(
+		port,
+		GENERIC_READ | GENERIC_WRITE,
+		0, // exclusive access
+		NULL, // no security
+		OPEN_EXISTING,
+		FILE_ATTRIBUTE_NORMAL,
+		NULL // hTemplate
+	);
+	if(INVALID_HANDLE_VALUE != hPort){
+		CloseHandle(hPort);
+		hPort = INVALID_HANDLE_VALUE;
+		return FALSE;
+	}
+	return TRUE;
 } // PortInUse
 
 // --------------------------- FillSerialCBoxUsedResources ------------------
 // Calls the function FillSerialCBox(), and then puts a '*' next to all used
 // ports.
-void FillSerialCBoxUsedResources(CComboBox * cBox, LPCTSTR currentselection)
-{
-DWORD index, count;
-LONG selection;
-CString selectionText;
-   FillSerialCBox(cBox, currentselection);
-   count = cBox->GetCount();
-   selection = cBox->GetCurSel();
-   index = 0;
-   while (index < count)
-   {
-      cBox->GetLBText(index, selectionText);
-      if (PortInUse(selectionText))
-      {
-         cBox->DeleteString(index);
-         selectionText = selectionText + PORT_INUSESTR;  // " *"
-         cBox->InsertString(index, selectionText);
-         cBox->SetItemData(index, index);
-      }
-      index++;
-   }
-   cBox->SetCurSel(selection);
+void FillSerialCBoxUsedResources(CComboBox * cBox, LPCTSTR currentselection){
+	CString selectionText;
+	FillSerialCBox(cBox, currentselection);
+	const int count = cBox->GetCount();
+	const int selection = cBox->GetCurSel();
+	for(int index = 0; index < count; ++index){
+		cBox->GetLBText(index, selectionText);
+		if(PortInUse(selectionText)){
+			cBox->DeleteString(index);
+			selectionText = selectionText + PORT_INUSESTR; // " *"
+			cBox->InsertString(index, selectionText);
+			cBox->SetItemData(index, index);
+		}
+	}
+	cBox->SetCurSel(selection);
 } // FillSerialCBoxUsedResources
 
 // ---------------------------- ClearPortUseMark -------------------------
 // Removes the '*' mark from a port name if present.
 // Use this function to tread the LB contents if U used FillSerialCBoxUsedResources()
-void ClearPortUseMark(LPSTR name)
-{
-char *next_token1 = NULL;
- 
-   if (strtok_s(name, PORT_INUSESTR, &next_token1 ))
-   {  // empty statement, since strtok modifies the string.
-   }
+void ClearPortUseMark(LPTSTR name){
+	TCHAR *next_token1 = NULL;
+	if(_tcstok_s(name, PORT_INUSESTR, &next_token1)){
+		// empty statement, since strtok modifies the string.
+	}
 } // ClearPortUseMark
-
-
 
 // pip 1512-400-1997 added
 // ------------------------ Round -----------------------------------------
 // PURPOSE : Rounds a precision floating point value, to allow casting to an
 // integer value. This is because the Casting of 2.9999999999999999999999999
 // actually gives us 2, not 3 like expected.
-double Round(double val)
-{
-   double r = fmod(val,1);
-   if (r>=0.5)
-      return ceil(val);
-   return floor(val);
+double Round(double val){
+	const double r = fmod(val, 1);
+	if(r >= 0.5){
+		return ceil(val);
+	}else{
+		return floor(val);
+	}
 } // Round
 // pip 1512-400-1997 added
-
-
-// ---------------- SwopBytes (Global Generic) -----------------------------
-// PURPOSE : Converts WORD from large indian to little indian
-// (and back if called again)
-LONG SwopBytes(WORD * x)
-{
-WORD loByte;
-WORD hiByte;
-
-  loByte = LOBYTE(*x);
-  hiByte = HIBYTE(*x);
-  *x = (WORD)((loByte<<8) + hiByte);
-  return(SUCCESS);
-} // SwopBytes
-
 
 // --------------- SwopWords (Global Generic) --------------------------------
 // PURPOSE : Converts DWORD from large endian to small endian
 // (and back if called again)
-LONG SwopWords(DWORD * x)
-{
-DWORD loWord;
-DWORD hiWord;
-
-  loWord = LOWORD(*x);
-  hiWord = HIWORD(*x);
+LONG SwopWords(DWORD *x){
+  const DWORD loWord = LOWORD(*x);
+  const DWORD hiWord = HIWORD(*x);
   *x = (loWord<<16) + hiWord ;
-  return(SUCCESS);
+  return SUCCESS;
 } // SwopWords
 
-
-// ----------------- SwopDWords (Global Generic) --------------------------------
-// PURPOSE : Converts DWORD from large endian to small endian
-// (and back if called again)
-LONG SwopDWords(DWORD * x)
-{
-DWORD loWordLoByte;     // Byte 0
-DWORD loWordHiByte;     // Byte 1
-DWORD hiWordLoByte;     // Byte 2
-DWORD hiWordHiByte;     // Byte 3
-
-   loWordLoByte = LOBYTE(LOWORD(*x));   // Byte 0
-   loWordHiByte = HIBYTE(LOWORD(*x));   // Byte 1
-   hiWordLoByte = LOBYTE(HIWORD(*x));   // Byte 2
-   hiWordHiByte = HIBYTE(HIWORD(*x));   // Byte 3
-   //   byte 0                byte 1             byte 2            byte 3
-   *x = (loWordLoByte<<24) | (loWordHiByte<<16) | (hiWordLoByte<<8) | (hiWordHiByte);
-   //   byte 3                byte 2             byte 1            byte 0
-   *x = (hiWordLoByte<<24) | (hiWordHiByte<<16) | (loWordLoByte<<8) | (loWordHiByte);
-   return(SUCCESS);
-} // SwopDWords
-
-
-// ------------------ BCDtoLONG (Global Generic) --------------------------------
-// PURPOSE : Converts BCD (1 to 8 digit) to LONG
-// Support a max of 8 digits BCD
-LONG BCDtoLONG( DWORD bcdValue,
-                DWORD bcdDigits,
-                PLONG longValue
-              )
-{
-DWORD multiplier = 1;
-DWORD i;
-   *longValue = 0;
-
-   if(bcdDigits > 8)
-      return(FAILED);
-   for(i=0 ; i < bcdDigits ; i++)
-   {
-      if( (bcdValue & 0x0000000F) > 9 )
-         return(FAILED);
-      *longValue  += (bcdValue & 0x0000000F) * multiplier;
-      bcdValue = bcdValue >> 4;
-      multiplier = multiplier * 10;
-   }
-   return(SUCCESS);
-} // BCDtoLONG
-
-
-// ------------------- LONGtoBCD (Global Generic) ----------------------
-// PURPOSE : Converts LONG to BCD (1 to 8 digit)
-// Support a max of 8 digits BCD
-LONG LONGtoBCD( LONG   longValue,
-                DWORD  bcdDigits,
-                DWORD *bcdValue
-              )
-{
-DWORD i;
-CHAR  longValueStr[9];
-PCHAR strPtr = longValueStr;
-
-   if(bcdDigits > 8)
-      return(FAILED);
-
-   *bcdValue = 0;
-   sprintf_s(strPtr, sizeof(longValueStr), "%08ld", longValue);
-
-   for(i=8 ; i > (8-bcdDigits) ; i--)
-   {
-      *bcdValue += (* (strPtr + i - 1) - 48) << ((8-i) * 4);
-   }
-   return(SUCCESS);
-} // LONGtoBCD
-
-
 // --------------------------- FillDWordCBox --------------------------
-void FillDWordCBox(CComboBox * cBox, DWORD * table, WORD tableLen,
-                   DWORD currentsetting)
-{
-DWORD count;
-TCHAR temp[256];
+void FillDWordCBox(
+	CComboBox *cBox,
+	DWORD *table,
+	size_t tableLen,
+	DWORD currentsetting
+){
+	ASSERT(0 != cBox->m_hWnd);
+	ASSERT(0 != table);
 
-   ASSERT(cBox->m_hWnd!=0);
-   cBox->ResetContent();
-   for (count = 0; count < tableLen; count++)
-   {
-      _stprintf_s(temp, _countof(temp), TEXT("%lu"), table[count]);
-      cBox->AddString(temp);  //strTablePtr[count]);
-      cBox->SetItemData(count,  *(table + count));
-      if (*(table + count) == currentsetting)
-         cBox->SetCurSel(count);
-   }
+	cBox->ResetContent();
+	for(size_t count = 0; count < tableLen; ++count) {
+		CString str;
+		str.Format(TEXT("%lu"), table[count]);
+		cBox->AddString(str);  //strTablePtr[count]);
+		cBox->SetItemData(count, *(table + count));
+		if(*(table + count) == currentsetting){
+			cBox->SetCurSel(count);
+		}
+	}
 } // FillDWordCBox
 
-// utilities
-// -------------------------------- ExistFile ------------------------------
-BOOL ExistFile(LPCTSTR fN)
+#if 0 // no one use these functions
+  // ---------------- SwopBytes (Global Generic) -----------------------------
+  // PURPOSE : Converts WORD from large indian to little indian
+  // (and back if called again)
+LONG SwopBytes(WORD * x)
 {
-   HANDLE h = NULL;
-   WIN32_FIND_DATA wfd;
-   DWORD err;
+	WORD loByte;
+	WORD hiByte;
 
-   h = FindFirstFile(fN, &wfd);
-   if (h == INVALID_HANDLE_VALUE)
-   {
-      err = GetLastError();
-      return(FALSE);
-   }
-   else
-   {
-      FindClose(h);
-      return(TRUE);
-   }
-} // ExistFile
+	loByte = LOBYTE(*x);
+	hiByte = HIBYTE(*x);
+	*x = (WORD)((loByte << 8) + hiByte);
+	return(SUCCESS);
+} // SwopBytes
 
+  // ----------------- SwopDWords (Global Generic) --------------------------------
+  // PURPOSE : Converts DWORD from large endian to small endian
+  // (and back if called again)
+LONG SwopDWords(DWORD * x)
+{
+	DWORD loWordLoByte;     // Byte 0
+	DWORD loWordHiByte;     // Byte 1
+	DWORD hiWordLoByte;     // Byte 2
+	DWORD hiWordHiByte;     // Byte 3
 
+	loWordLoByte = LOBYTE(LOWORD(*x));   // Byte 0
+	loWordHiByte = HIBYTE(LOWORD(*x));   // Byte 1
+	hiWordLoByte = LOBYTE(HIWORD(*x));   // Byte 2
+	hiWordHiByte = HIBYTE(HIWORD(*x));   // Byte 3
+										 //   byte 0                byte 1             byte 2            byte 3
+	*x = (loWordLoByte << 24) | (loWordHiByte << 16) | (hiWordLoByte << 8) | (hiWordHiByte);
+	//   byte 3                byte 2             byte 1            byte 0
+	*x = (hiWordLoByte << 24) | (hiWordHiByte << 16) | (loWordLoByte << 8) | (loWordHiByte);
+	return(SUCCESS);
+} // SwopDWords
+
+  // ------------------ BCDtoLONG (Global Generic) --------------------------------
+  // PURPOSE : Converts BCD (1 to 8 digit) to LONG
+  // Support a max of 8 digits BCD
+LONG BCDtoLONG(DWORD bcdValue,
+	DWORD bcdDigits,
+	PLONG longValue
+	)
+{
+	DWORD multiplier = 1;
+	DWORD i;
+	*longValue = 0;
+
+	if (bcdDigits > 8)
+		return(FAILED);
+	for (i = 0; i < bcdDigits; i++)
+	{
+		if ((bcdValue & 0x0000000F) > 9)
+			return(FAILED);
+		*longValue += (bcdValue & 0x0000000F) * multiplier;
+		bcdValue = bcdValue >> 4;
+		multiplier = multiplier * 10;
+	}
+	return(SUCCESS);
+} // BCDtoLONG
+
+  // ------------------- LONGtoBCD (Global Generic) ----------------------
+  // PURPOSE : Converts LONG to BCD (1 to 8 digit)
+  // Support a max of 8 digits BCD
+LONG LONGtoBCD(LONG   longValue,
+	DWORD  bcdDigits,
+	DWORD *bcdValue
+	)
+{
+	DWORD i;
+	CHAR  longValueStr[9];
+	PCHAR strPtr = longValueStr;
+
+	if (bcdDigits > 8)
+		return(FAILED);
+
+	*bcdValue = 0;
+	sprintf_s(strPtr, sizeof(longValueStr), "%08ld", longValue);
+
+	for (i = 8; i > (8 - bcdDigits); i--)
+	{
+		*bcdValue += (*(strPtr + i - 1) - 48) << ((8 - i) * 4);
+	}
+	return(SUCCESS);
+} // LONGtoBCD
+#endif
