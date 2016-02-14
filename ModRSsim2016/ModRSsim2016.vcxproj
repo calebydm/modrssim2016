@@ -140,7 +140,7 @@
       <MapExports>true</MapExports>
       <AssemblyDebug>true</AssemblyDebug>
       <LargeAddressAware>true</LargeAddressAware>
-      <SetChecksum>true</SetChecksum>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
