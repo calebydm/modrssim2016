@@ -30,10 +30,10 @@
  ///////////////////
  // Constructor sets default colors = blue/purple.
  //
- CStaticLink::CStaticLink()
+ CStaticLink::CStaticLink():
+	 m_colorUnvisited(RGB(0, 0, 255)),
+	 m_colorVisited(RGB(128, 0, 128))
  {
-     m_colorUnvisited = RGB(0,0,255);       // blue
-     m_colorVisited   = RGB(128,0,128);     // purple
      m_bVisited       = FALSE;              // not visited yet
      m_hHandCursor = 0;
 	//{{AFX_DATA_INIT(CStaticLink)

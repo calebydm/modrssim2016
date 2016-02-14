@@ -204,7 +204,7 @@ CString title;
    m_hyperlink1.SetHoverCursorHandle(AfxGetApp()->LoadCursor(IDC_MYHANDCURSOR));
    //m_hyperlink2.SetHoverCursorHandle(AfxGetApp()->LoadCursor(IDC_MYHANDCURSOR));		// Deleted 2015-07-26 by DL
    // set the URL that we will actually go to here
-   m_hyperlink1.m_link.LoadString(IDS_SFWEBURL);// = "http://www.sourceforge.net/projects/modrssim2/";	// Revised 2015-07-26 by DL
+   m_hyperlink1.SetLinkFromResource(IDS_SFWEBURL);// = "http://www.sourceforge.net/projects/modrssim2/";	// Revised 2015-07-26 by DL
    // set the URL that we will actually go to here
    //m_hyperlink2.m_link = "http://www.modicon.com/";			// Deleted 2015-07-26 by DL
 
@@ -215,7 +215,7 @@ CString title;
 
    // set the URL that we will actually go to here
    mailLink.Format("mailto:%s?subject=%s%s", lpAuthor_email, "mod_rssim", lpsMyAppVersion);  // append it
-   m_emaillink1.m_link = mailLink;
+   m_emaillink1.SetLinkFromString(mailLink);
 
    SetRegStatus();
    //TOOLTIPS START
