@@ -88,7 +88,7 @@
      // For an URL, this means opening it in the browser.
      //
      HINSTANCE h = ShellExecute(NULL, TEXT("open"), m_link, NULL, NULL, SW_SHOWNORMAL);
-     if ((UINT)h > 32) {
+     if (reinterpret_cast<INT_PTR>(h) > 32) {
          m_bVisited = TRUE;       // (not really--might not have found link)
          Invalidate();            // repaint to show visited color
      } else {

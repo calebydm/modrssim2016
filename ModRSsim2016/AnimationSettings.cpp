@@ -228,7 +228,7 @@ void CAnimationSettingsDlg::OnOK()
 	CDialog::OnOK();
 }
 
-void CAnimationSettingsDlg::OnTimer(UINT nIDEvent) 
+void CAnimationSettingsDlg::OnTimer(UINT_PTR nIDEvent) 
 {
 	// TODO: Add your message handler code here and/or call default
    if (DLGTIMER_NUMBER ==	nIDEvent)

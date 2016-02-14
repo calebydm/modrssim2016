@@ -49,7 +49,7 @@ protected:
 	//{{AFX_MSG(CTrainingSimDlg)
 	virtual BOOL OnInitDialog();
 	afx_msg void OnSet();
-	afx_msg void OnTimer(UINT nIDEvent);
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg void OnSelchangeCbregisternames();
 	afx_msg void OnCheck1();
 	afx_msg void OnCheck2();

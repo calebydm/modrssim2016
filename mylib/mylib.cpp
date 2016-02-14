@@ -321,9 +321,9 @@ void FillDWordCBox(
 		CString str;
 		str.Format(TEXT("%lu"), table[count]);
 		cBox->AddString(str);  //strTablePtr[count]);
-		cBox->SetItemData(count, *(table + count));
+		cBox->SetItemData(static_cast<int>(count), *(table + count));
 		if(*(table + count) == currentsetting){
-			cBox->SetCurSel(count);
+			cBox->SetCurSel(static_cast<int>(count));
 		}
 	}
 } // FillDWordCBox

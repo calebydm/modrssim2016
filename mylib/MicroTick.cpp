@@ -139,7 +139,7 @@ BOOL drawFocus = FALSE;
    
    dc.SetBkMode(TRANSPARENT);
    dc.SetTextColor(textColor);
-   dc.DrawText(buffer, _tcslen(buffer), &clientRect, DT_VCENTER | DT_CENTER);
+   dc.DrawText(buffer, static_cast<int>(_tcslen(buffer)), &clientRect, DT_VCENTER | DT_CENTER);
 
    // select old pen back into DC, not required in a dialog actually
    //dc.SelectObject(pOldPen);

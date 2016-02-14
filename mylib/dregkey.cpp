@@ -222,9 +222,10 @@ LONG DRegKey::SetValue(LPCTSTR valueName , DWORD dwValue)
 // strings
 LONG DRegKey::SetValue(LPCTSTR valueName , LPCTSTR szValue, DWORD length)
 {
-   if (-1 == length)
-      length = _tcslen(szValue);
-   result = RegSetValueEx(m_hKey, valueName, 0, REG_SZ, (BYTE*)szValue, (length+1) * sizeof(TCHAR));
+	size_t sizeInBytes = length;
+	if (-1 == length) { sizeInBytes = _tcslen(szValue); }
+	sizeInBytes = (sizeInBytes + 1) * sizeof(TCHAR);
+	result = RegSetValueEx(m_hKey, valueName, 0, REG_SZ, (BYTE*)szValue, static_cast<DWORD>(sizeInBytes));
    return(result);
 } // SetValue
 
@@ -282,7 +283,7 @@ LONG DRegKey::DeleteKeyRecurse(LPCTSTR keyName)
 
 // ------------------------------ EnumKey ------------------------
 // populate a CStringarray with key names
-LONG DRegKey::EnumKey(CStringArray &csaKeyNames)
+INT_PTR DRegKey::EnumKey(CStringArray &csaKeyNames)
 {
 LONG ret = ERROR_SUCCESS;
 DWORD index=0;

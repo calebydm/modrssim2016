@@ -2573,7 +2573,7 @@ END_MESSAGE_MAP()
 //
 /////////////////////////////////////////////////////////////////////////////
 
-int CFECFileDialog::DoModal()
+INT_PTR CFECFileDialog::DoModal()
 {
     if (Files)
     {
@@ -2583,7 +2583,7 @@ int CFECFileDialog::DoModal()
         Folder = NULL;
     }
 
-    int ret = CFileDialog::DoModal();
+    INT_PTR ret = CFileDialog::DoModal();
 
     if (ret == IDCANCEL)
     {

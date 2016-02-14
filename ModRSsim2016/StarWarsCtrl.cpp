@@ -234,7 +234,7 @@ void CStarWarsCtrl::InvalidateCtrl()
 /* Description   : Update display									        */
 /*																	                 */
 /********************************************************************/
-void CStarWarsCtrl::OnTimer(UINT nIDEvent) 
+void CStarWarsCtrl::OnTimer(UINT_PTR nIDEvent) 
 {
 	if (nIDEvent == 1)
 		InvalidateCtrl();

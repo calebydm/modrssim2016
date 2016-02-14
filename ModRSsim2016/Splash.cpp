@@ -258,7 +258,7 @@ CString tempText;
 
 // ------------------------------- OnTimer -----------------------------
 // count down timer messages untill we want to hide the splash screen
-void CSplashWnd::OnTimer(UINT nIDEvent)
+void CSplashWnd::OnTimer(UINT_PTR nIDEvent)
 {
 	UNREFERENCED_PARAMETER(nIDEvent);
    if (0 == m_splashShowCount)

@@ -83,7 +83,7 @@ protected:
 	//{{AFX_MSG(CAnimationSettingsDlg)
 	virtual BOOL OnInitDialog();
 	virtual void OnOK();
-	afx_msg void OnTimer(UINT nIDEvent);
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg void OnSelchangeStnEnabled();
 	afx_msg void OnSelchangeStnDisabled();
 	afx_msg void OnSelchangeStnActive();

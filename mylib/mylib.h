@@ -137,7 +137,7 @@ class DRegKey : public CObject
       LONG DeleteKey(LPCTSTR keyName = NULL);
       LONG DeleteKeyRecurse(LPCTSTR keyName = NULL);
 
-      LONG EnumKey(CStringArray &csaKeyNames);          // populate a CStringarray with key names
+      INT_PTR EnumKey(CStringArray &csaKeyNames);          // populate a CStringarray with key names
       LONG EnumKey(DWORD index, CString &valueName);         // return the key name at an index
       LONG EnumKey(DWORD index, LPTSTR string, DWORD maxSize);// ditto
    private:

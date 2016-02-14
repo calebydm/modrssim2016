@@ -47,7 +47,7 @@ protected:
 	//{{AFX_MSG(CCommsLamp)
 	afx_msg void OnPaint();
 	afx_msg void OnDestroy();
-	afx_msg void OnTimer(UINT nIDEvent);
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	//}}AFX_MSG
 
    // methods
@@ -58,7 +58,7 @@ protected:
    COLORREF m_ONcolor, m_OFFcolor;
 
    DWORD m_timerDuration;
-   DWORD m_timerID;
+   UINT_PTR m_timerID;
 
 	DECLARE_MESSAGE_MAP()
 };

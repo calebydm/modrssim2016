@@ -175,7 +175,7 @@ void		CColorPickerCB::DrawItem( LPDRAWITEMSTRUCT pDIStruct )
 			dcContext.SetTextColor( crColor );				// Set Text Color
 		}
 		else												// If Normal
-			crColor = GetItemData( iItem );					// Get Color Value
+			crColor = static_cast<COLORREF>(GetItemData( iItem ));					// Get Color Value
 
 		dcContext.SetBkMode( TRANSPARENT );					// Transparent Background
 		dcContext.TextOut( rTextRect.left, rTextRect.top,
@@ -196,7 +196,7 @@ COLORREF	CColorPickerCB::GetSelectedColorValue( void )
 	if( iSelectedItem == CB_ERR )							// If Nothing Selected
 		return( RGB( 0, 0, 0 ) );							// Return Black
 
-	return( GetItemData( iSelectedItem ) );					// Return Selected Color
+	return( static_cast<COLORREF>(GetItemData( iSelectedItem ) ));					// Return Selected Color
 }
 
 

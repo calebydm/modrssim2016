@@ -161,7 +161,7 @@ int val;
 }
 
 // -------------------------------- OnTimer -----------------------------
-void CTrainingSimDlg::OnTimer(UINT nIDEvent) 
+void CTrainingSimDlg::OnTimer(UINT_PTR nIDEvent) 
 {
 WORD val, controlVal;
 CString statusText;

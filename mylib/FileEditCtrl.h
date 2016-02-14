@@ -62,7 +62,7 @@ public:
 
     virtual ~CFECFileDialog();
 
-    virtual int DoModal();
+    virtual INT_PTR DoModal();
     CString GetNextPathName(POSITION &pos) const;
     POSITION GetStartPosition();
 

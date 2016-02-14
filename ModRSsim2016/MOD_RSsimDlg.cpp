@@ -1864,7 +1864,7 @@ BOOL CRegisterUpdaterIMP::ModbusClone()
 // end Vinay
 
 // ------------------------------------ OnTimer ---------------------------------
-void CMOD_simDlg::OnTimer(UINT nIDEvent) 
+void CMOD_simDlg::OnTimer(UINT_PTR nIDEvent) 
 {
 static int tickerCount=0;
 int stationIndex, firstVisibleStation, lastVisibleStation;

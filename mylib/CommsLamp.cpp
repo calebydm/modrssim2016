@@ -153,7 +153,7 @@ void CCommsLamp::OnDestroy()
 }
 
 // ---------------------------- OnTimer ------------------------------
-void CCommsLamp::OnTimer(UINT nIDEvent) 
+void CCommsLamp::OnTimer(UINT_PTR nIDEvent) 
 {
 	// TODO: Add your message handler code here and/or call default
    if (m_timerDuration && (m_timerID==nIDEvent))
